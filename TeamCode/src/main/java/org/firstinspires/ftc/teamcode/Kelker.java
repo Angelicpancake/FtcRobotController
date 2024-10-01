@@ -30,56 +30,56 @@ public class Kelker extends OpMode {
         backRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
-    public void forward() {
+    public void goForward() {
         backLeft.setPower(setPower);
         backRight.setPower(setPower);
         frontLeft.setPower(setPower);
         frontRight.setPower(setPower);
     }
 
-    public void backward() {
+    public void goBackward() {
         backLeft.setPower(-1 * setPower);
         backRight.setPower(-1 * setPower);
         frontLeft.setPower(-1 * setPower);
         frontRight.setPower(-1 * setPower);
     }
 
-    public void right() {
+    public void goRight() {
         backLeft.setPower(-1 * setPower);
         backRight.setPower(setPower);
         frontLeft.setPower(setPower);
         frontRight.setPower(-1 * setPower);
     }
 
-    public void left() {
+    public void goLeft() {
         backLeft.setPower(setPower);
         backRight.setPower(-1 * setPower);
         frontLeft.setPower(-1 * setPower);
         frontRight.setPower(setPower);
     }
 
-    public void forwardRight() {
+    public void goForwardRight() {
         backLeft.setPower(0);
         backRight.setPower(setPower);
         frontLeft.setPower(setPower);
         frontRight.setPower(0);
     }
 
-    public void forwardLeft() {
+    public void goForwardLeft() {
         backLeft.setPower(setPower);
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(setPower);
     }
 
-    public void backwardRight() {
+    public void goBackwardRight() {
         backLeft.setPower(-1 * setPower);
         backRight.setPower(0);
         frontLeft.setPower(0);
         frontRight.setPower(-1 * setPower);
     }
 
-    public void backwardLeft() {
+    public void goBackwardLeft() {
         backLeft.setPower(0);
         backRight.setPower(-1 * setPower);
         frontLeft.setPower( -1 * setPower);
