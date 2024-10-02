@@ -78,14 +78,14 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
         backR.setPower(-powerInput);
         frontR.setPower(-powerInput);
         backL.setPower(powerInput);
-        backR.setPower(powerInput);
+        frontL.setPower(powerInput);
     }
 
     public void turnCounterClockwise(){
         backR.setPower(powerInput);
         frontR.setPower(powerInput);
         backL.setPower(-powerInput);
-        backR.setPower(-powerInput);
+        frontL.setPower(-powerInput);
 
     }
 
