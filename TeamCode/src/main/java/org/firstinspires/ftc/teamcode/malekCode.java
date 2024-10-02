@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp (name ="Malek")
-public class malekCode extends OpMode {
+public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
 
     private DcMotor backL;
     private DcMotor backR;
@@ -31,8 +31,8 @@ public class malekCode extends OpMode {
     }
 
     public void goBackwards(){
-        backL.setPower(-1 * powerInput);
-        backR.setPower(-1 * powerInput);
+        backL.setPower(-powerInput);
+        backR.setPower(-powerInput);
         frontL.setPower(-1 * powerInput);
         frontR.setPower(-1 * powerInput);
     }
@@ -71,6 +71,21 @@ public class malekCode extends OpMode {
     public void goDiagonalLeftBackwards(){
         frontL.setPower(-1 * powerInput);
         backR.setPower(-1 * powerInput);
+
+    }
+
+    public void turnClockwise(){
+        backR.setPower(-powerInput);
+        frontR.setPower(-powerInput);
+        backL.setPower(powerInput);
+        backR.setPower(powerInput);
+    }
+
+    public void turnCounterClockwise(){
+        backR.setPower(powerInput);
+        frontR.setPower(powerInput);
+        backL.setPower(-powerInput);
+        backR.setPower(-powerInput);
 
     }
 
