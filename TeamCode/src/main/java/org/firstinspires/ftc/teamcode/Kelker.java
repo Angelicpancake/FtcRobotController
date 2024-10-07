@@ -8,17 +8,23 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "nicolas")
 
 public class Kelker extends OpMode {
+
+    // makes DcMotors for each wheel
     private DcMotor backLeft;
     private DcMotor backRight;
     private DcMotor frontLeft;
     private DcMotor frontRight;
+
+    // sets power for use in movement code
     private double setPower =1;
 
+    // loops for TeleOp so it continuously checks for inputs
     @Override
     public void loop() {
 
     }
 
+    // initializes each motor for use
     @Override
     public void init() {
         backLeft = hardwareMap.get(DcMotor.class, "motorLeft");
@@ -26,10 +32,13 @@ public class Kelker extends OpMode {
         frontLeft = hardwareMap.get(DcMotor.class, "motorLeft");
         frontRight = hardwareMap.get(DcMotor.class, "motorRight");
 
+        // makes it so all motors are positive when moving forward for easier understanding
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
+
+    // moves the robot forward
     public void goForward() {
         backLeft.setPower(setPower);
         backRight.setPower(setPower);
@@ -85,5 +94,21 @@ public class Kelker extends OpMode {
         frontLeft.setPower( -1 * setPower);
         frontRight.setPower(0);
     }
+
+    public void clockWise() {
+        backLeft.setPower(setPower);
+        backRight.setPower(-1 * setPower);
+        frontLeft.setPower(setPower);
+        frontRight.setPower(-1 * setPower);
+    }
+
+    public void antiClockWise() {
+        backLeft.setPower(-1 * setPower);
+        backRight.setPower(setPower);
+        frontLeft.setPower(-1 * setPower);
+        frontRight.setPower(setPower);
+    }
+
+
 
 }
