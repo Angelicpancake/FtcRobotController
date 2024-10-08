@@ -23,6 +23,45 @@ public class JinkaMovement extends OpMode {
     // theres nothing here now cus we got nothing lol
     @Override
     public void loop() {
+        //gamepad1 is an object
+        // leftstick_x is a variable of the object
+        //M means movement
+        //R means rotation
+        double xM = gamepad1.left_stick_x;
+        double yM = gamepad1.left_stick_y;
+        double xR = gamepad1.right_stick_x;
+
+
+
+        //checks for diagonal movements first to not interfere with axis movements
+        //if statements for diagonal movement
+        if(xM > 0.3 && yM > 0.3)
+            forwardRight();
+        else if (xM < -0.3 && yM > 0.3)
+            forwardLeft();
+        else if (xM > 0.3 && yM < -0.3)
+            backwardRight();
+        else if (xM < -0.3 && yM < -0.3)
+            backwardLeft();
+        //if statements for right, left, forward, backwards
+        else if (yM > 0.3 && xM==0)
+            forward();
+        else if (yM < -0.3 && xM==0)
+            backward();
+        else if (xM > 0.3 && yM==0)
+            right();
+        else if (xM < -0.3 && yM==0)
+            left();
+
+        //movement for clockwise and counterclockwise
+        //only uses x axis for rotation
+        if (xR > 0.3)
+            rotateClockwise();
+        else if(xR <-0.3)
+            rotateCounterclockwise();
+
+
+
 
     }
 
