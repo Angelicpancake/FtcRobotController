@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name = "nicolas")
 
@@ -21,8 +20,29 @@ public class Kelker extends OpMode {
     // loops for TeleOp so it continuously checks for inputs
     @Override
     public void loop() {
-        double x = gamepad1.left_stick_x;
-        double y = gamepad1.left_stick_y;
+        double xM = gamepad1.left_stick_x;
+        double yM = gamepad1.left_stick_y;
+        double xR = gamepad1.right_stick_x;
+
+        if (yM > 0.3 && xM==0)
+            goForward();
+        else if (yM < -0.3)
+            goBackward();
+
+        if (xM > 0.3)
+            goRight();
+        else if (xM < -0.3)
+            goLeft();
+
+        if(xM > 0.3 && yM > 0.3)
+            goForwardRight();
+        else if (xM < -0.3 && yM > 0.3)
+            goForwardLeft();
+        else if (xM > 0.3 && yM < -0.3)
+            goBackwardRight();
+        else if (xM < -0.3 && yM < -0.3)
+            goBackwardLeft();
+
         
     }
 
