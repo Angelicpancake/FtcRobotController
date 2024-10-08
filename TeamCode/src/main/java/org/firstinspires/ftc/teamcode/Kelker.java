@@ -24,17 +24,7 @@ public class Kelker extends OpMode {
         double yM = gamepad1.left_stick_y;
         double xR = gamepad1.right_stick_x;
 
-        if (yM > 0.3 && xM==0)
-            goForward();
-        else if (yM < -0.3)
-            goBackward();
-
-        if (xM > 0.3)
-            goRight();
-        else if (xM < -0.3)
-            goLeft();
-
-        if(xM > 0.3 && yM > 0.3)
+        if (xM > 0.3 && yM > 0.3)
             goForwardRight();
         else if (xM < -0.3 && yM > 0.3)
             goForwardLeft();
@@ -42,17 +32,29 @@ public class Kelker extends OpMode {
             goBackwardRight();
         else if (xM < -0.3 && yM < -0.3)
             goBackwardLeft();
+        else if (yM > 0.3)
+            goForward();
+        else if (yM < -0.3)
+            goBackward();
+        else if (xM > 0.3)
+            goRight();
+        else if (xM < -0.3)
+            goLeft();
 
-        
+        if (xR > 0.3)
+            clockwise();
+        else if (xR < -0.3)
+            counterclockwise();
+
     }
 
-    // initializes each motor for use
+    // initializes each motor for use 
     @Override
     public void init() {
-        backLeft = hardwareMap.get(DcMotor.class, "motorLeft");
-        backRight = hardwareMap.get(DcMotor.class, "motorRight");
-        frontLeft = hardwareMap.get(DcMotor.class, "motorLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "motorRight");
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
 
         // makes it so all motors are positive when moving forward for easier understanding
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -117,14 +119,14 @@ public class Kelker extends OpMode {
         frontRight.setPower(0);
     }
 
-    public void clockWise() {
+    public void clockwise() {
         backLeft.setPower(setPower);
         backRight.setPower(-1 * setPower);
         frontLeft.setPower(setPower);
         frontRight.setPower(-1 * setPower);
     }
 
-    public void antiClockWise() {
+    public void counterclockwise() {
         backLeft.setPower(-1 * setPower);
         backRight.setPower(setPower);
         frontLeft.setPower(-1 * setPower);
