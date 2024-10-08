@@ -21,7 +21,9 @@ public class Kelker extends OpMode {
     // loops for TeleOp so it continuously checks for inputs
     @Override
     public void loop() {
-
+        double x = gamepad1.left_stick_x;
+        double y = gamepad1.left_stick_y;
+        
     }
 
     // initializes each motor for use
