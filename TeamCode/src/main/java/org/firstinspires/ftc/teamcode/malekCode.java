@@ -17,10 +17,21 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
     private DcMotor frontL;
     private DcMotor frontR;
     private double powerInput;
+    
 
 
     @Override
     public void loop(){
+        double x = gamepad1.left_stick_x;
+        double y = gamepad1.left_stick_y;
+
+        if(y > 0){
+            goForward();
+        } else if (y < 0){
+            goBackwards();
+        }
+        
+
 
     }
     public void goForward(){
