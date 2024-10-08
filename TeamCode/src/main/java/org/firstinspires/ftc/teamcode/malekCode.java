@@ -30,7 +30,7 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
         } else if (y < 0){
             goBackwards();
         }
-        
+
 
 
     }
@@ -102,8 +102,8 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
 
     @Override
     public void init(){
-        backL = hardwareMap.get(DcMotor.class, "motorLeft");
-        backR = hardwareMap.get(DcMotor.class, "motorRight");
+        backL = hardwareMap.get(DcMotor.class, "backLeft");
+        backR = hardwareMap.get(DcMotor.class, "backrRight");
         frontL = hardwareMap.get(DcMotor.class, "frontLeft");
         frontR = hardwareMap.get(DcMotor.class, "frontRight");
 
