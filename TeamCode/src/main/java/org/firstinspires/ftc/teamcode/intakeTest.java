@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+`package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -34,9 +34,11 @@ public class intakeTest extends OpMode
         else if (input < -0.3)
         {
             intake.setPower(-power);
+
         }
         else
             intake.setPower(0);
     }
 }
 
+`
