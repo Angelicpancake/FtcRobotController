@@ -16,23 +16,60 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
     private DcMotor backR;
     private DcMotor frontL;
     private DcMotor frontR;
+    private DcMotor intake;
     private double powerInput;
     
 
 
     @Override
     public void loop(){
-        double x = gamepad1.left_stick_x;
-        double y = gamepad1.left_stick_y;
 
-        if(y > 0){
+        double rightTrigger = gamepad1.right_trigger;
+        double leftTrigger = gamepad1.left_trigger;
+
+        boolean rightBumber = gamepad1.right_bumper;
+        boolean leftBumber = gamepad1.left_bumper;
+
+        boolean buttonUp = gamepad1.dpad_up;
+        boolean buttonDown = gamepad1.dpad_down;
+        boolean buttonRight = gamepad1.dpad_right;
+        boolean buttonLeft = gamepad1.dpad_left;
+
+        boolean buttonA = gamepad1.a;
+        boolean buttonX = gamepad1.x;
+
+        double rightStickX = gamepad1.right_stick_x;
+        double rightStickY = gamepad1.right_stick_y;
+
+        double leftStickX= gamepad1.left_stick_x;
+        double leftStickY = gamepad1.left_stick_y;
+
+        if(buttonUp){
             goForward();
-        } else if (y < 0){
+        } else if (buttonDown){
             goBackwards();
+        } else if (buttonLeft) {
+            goLeft();
+        } else if (buttonRight) {
+            goRight();
+        } else if (rightStickX > 0.3) {
+            turnClockwise();
+        } else if (rightStickX < -0.3) {
+            turnCounterClockwise();
+        } else if (buttonA) {
+            intake();
+        } else if (buttonX) {
+            release();
         }
 
 
+    }
 
+    public void intake(){
+        intake.setPower(-powerInput);
+    }
+    public void release(){
+        intake.setPower(-powerInput);
     }
     public void goForward(){
         backL.setPower(powerInput);
@@ -103,9 +140,10 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
     @Override
     public void init(){
         backL = hardwareMap.get(DcMotor.class, "backLeft");
-        backR = hardwareMap.get(DcMotor.class, "backrRight");
+        backR = hardwareMap.get(DcMotor.class, "backRight");
         frontL = hardwareMap.get(DcMotor.class, "frontLeft");
         frontR = hardwareMap.get(DcMotor.class, "frontRight");
+        intake = hardwareMap.get(DcMotor.class, "intake");
 
         powerInput = 1;
 
