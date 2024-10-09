@@ -9,8 +9,9 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp(name = "intakeTest Joshua")
 public class intakeTest extends OpMode
 {
-    public DcMotor intake;
-    public double input;
+    private DcMotor intake;
+    private double input;
+
     public void init()
     {
         intake = hardwareMap.get(DcMotor.class, "intake");
@@ -22,6 +23,7 @@ public class intakeTest extends OpMode
     @Override
     public void loop()
     {
+
         this.input = gamepad1.right_stick_y;
 
         double power = 1.0;
