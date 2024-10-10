@@ -4,9 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@TeleOp(name = "nicolas")
+@TeleOp(name = "nicolasmove")
 
-public class Kelker extends OpMode {
+public class kelkermove extends OpMode {
 
     // makes DcMotors for each wheel
     private DcMotor backLeft;
@@ -15,7 +15,9 @@ public class Kelker extends OpMode {
     private DcMotor frontRight;
 
     // sets power for use in movement code
-    private double setPower =1;
+    private double setPower = 1;
+    private double setPowerR =1;
+
 
     // loops for TeleOp so it continuously checks for inputs
     @Override
@@ -23,6 +25,8 @@ public class Kelker extends OpMode {
         double xM = gamepad1.left_stick_x;
         double yM = gamepad1.left_stick_y;
         double xR = gamepad1.right_stick_x;
+
+
 
         if (xM > 0.3 && yM > 0.3)
             goForwardRight();
@@ -48,7 +52,7 @@ public class Kelker extends OpMode {
 
     }
 
-    // initializes each motor for use 
+    // initializes each motor for use
     @Override
     public void init() {
         backLeft = hardwareMap.get(DcMotor.class, "backLeft");
@@ -61,7 +65,6 @@ public class Kelker extends OpMode {
         backRight.setDirection(DcMotor.Direction.REVERSE);
     }
 
-
     // moves the robot forward
     public void goForward() {
         backLeft.setPower(setPower);
@@ -71,10 +74,10 @@ public class Kelker extends OpMode {
     }
 
     public void goBackward() {
-        backLeft.setPower(-1 * setPower);
-        backRight.setPower(-1 * setPower);
-        frontLeft.setPower(-1 * setPower);
-        frontRight.setPower(-1 * setPower);
+        backLeft.setPower(setPower);
+        backRight.setPower(setPower);
+        frontLeft.setPower(setPower);
+        frontRight.setPower(setPower);
     }
 
     public void goRight() {
@@ -85,10 +88,10 @@ public class Kelker extends OpMode {
     }
 
     public void goLeft() {
-        backLeft.setPower(setPower);
-        backRight.setPower(-1 * setPower);
-        frontLeft.setPower(-1 * setPower);
-        frontRight.setPower(setPower);
+        backLeft.setPower(-1* setPower);
+        backRight.setPower(setPower);
+        frontLeft.setPower(setPower);
+        frontRight.setPower(-1 * setPower);
     }
 
     public void goForwardRight() {
@@ -120,17 +123,17 @@ public class Kelker extends OpMode {
     }
 
     public void clockwise() {
-        backLeft.setPower(setPower);
-        backRight.setPower(-1 * setPower);
-        frontLeft.setPower(setPower);
-        frontRight.setPower(-1 * setPower);
+        backLeft.setPower(setPowerR);
+        backRight.setPower(-1 * setPowerR);
+        frontLeft.setPower(setPowerR);
+        frontRight.setPower(-1 * setPowerR);
     }
 
     public void counterclockwise() {
-        backLeft.setPower(-1 * setPower);
-        backRight.setPower(setPower);
-        frontLeft.setPower(-1 * setPower);
-        frontRight.setPower(setPower);
+        backLeft.setPower(-1 * setPowerR);
+        backRight.setPower(setPowerR);
+        frontLeft.setPower(-1 * setPowerR);
+        frontRight.setPower(setPowerR);
     }
 
 
