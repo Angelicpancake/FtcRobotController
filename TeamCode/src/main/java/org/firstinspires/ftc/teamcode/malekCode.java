@@ -60,7 +60,7 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
             intake();
         } else if (buttonX) {
             release();
-        }
+        } 
 
 
     }
@@ -110,7 +110,7 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
 
     }
 
-    public void gpDiagonalLeftForwards(){
+    public void goDiagonalLeftForwards(){
         frontR.setPower(powerInput);
         backL.setPower(powerInput);
 
