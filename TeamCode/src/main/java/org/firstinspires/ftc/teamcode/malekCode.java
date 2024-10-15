@@ -16,7 +16,7 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
     private DcMotor backR;
     private DcMotor frontL;
     private DcMotor frontR;
-    private DcMotor intake;
+//    private DcMotor intake;
     private double powerInput;
     
 
@@ -56,21 +56,21 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
             turnClockwise();
         } else if (rightStickX < -0.3) {
             turnCounterClockwise();
-        } else if (buttonA) {
-            intake();
-        } else if (buttonX) {
-            release();
-        } 
+        } //else if (buttonA) {
+//            intake();
+//        } else if (buttonX) {
+//            release();
+//        }
 
 
     }
 
-    public void intake(){
-        intake.setPower(-powerInput);
-    }
-    public void release(){
-        intake.setPower(-powerInput);
-    }
+//    public void intake(){
+//        intake.setPower(-powerInput);
+//    }
+//    public void release(){
+//        intake.setPower(-powerInput);
+//    }
     public void goForward(){
         backL.setPower(powerInput);
         backR.setPower(powerInput);
@@ -143,7 +143,7 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
         backR = hardwareMap.get(DcMotor.class, "backRight");
         frontL = hardwareMap.get(DcMotor.class, "frontLeft");
         frontR = hardwareMap.get(DcMotor.class, "frontRight");
-        intake = hardwareMap.get(DcMotor.class, "intake");
+//        intake = hardwareMap.get(DcMotor.class, "intake");
 
         powerInput = 1;
 
