@@ -35,15 +35,15 @@ public class autoTest extends OpMode {
             goBackwardLeft();
         }
         else if (pY1 >= 0.3) { //runs goForward when right stick is pushed up
-            goForward();
+            goBackward();
         }
         else if (pY1 <= -0.3) { //runs goBackward when right stick is pushed down
-            goBackward();
+            goForward();
         }
         else if (pX1 >= 0.3) { //runs goRight when right stick is pushed right
             goRight();
         }
-        else if (pX1 <= 0.3) { // runs goLeft when right stick is pushed left
+        else if (pX1 <= -0.3) { // runs goLeft when right stick is pushed left
             goLeft();
         }
         else {
