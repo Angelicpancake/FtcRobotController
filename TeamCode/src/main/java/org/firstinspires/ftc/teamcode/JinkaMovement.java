@@ -31,6 +31,7 @@ public class JinkaMovement extends OpMode {
         double yM = gamepad1.left_stick_y;
         double xR = gamepad1.right_stick_x;
 
+        setPower = 0.4;
 
 
         //checks for diagonal movements first to not interfere with axis movements
@@ -52,6 +53,8 @@ public class JinkaMovement extends OpMode {
             right();
         else if (xM < -0.3 && yM==0)
             left();
+        else
+            setPower = 0;
 
         //movement for clockwise and counterclockwise
         //only uses x axis for rotation
@@ -59,6 +62,8 @@ public class JinkaMovement extends OpMode {
             rotateClockwise();
         else if(xR <-0.3)
             rotateCounterclockwise();
+        else
+            setPower = 0;
     }
 
     @Override
