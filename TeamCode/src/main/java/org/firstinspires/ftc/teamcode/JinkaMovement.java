@@ -78,6 +78,18 @@ public class JinkaMovement extends OpMode {
         frontRight.setDirection(DcMotor.Direction.REVERSE);
         backRight.setDirection(DcMotor.Direction.REVERSE);
     }
+
+
+//    public void Diagonalmovement(){
+//        backLeft.setPower();
+//    }
+
+//    public void moveAdHoc(double x, double y){
+  ///      
+   // }
+
+
+
     //forward moves the bot forward
     public void forward() {
         backLeft.setPower(setPower);
