@@ -47,19 +47,24 @@ public class ArhanNew extends OpMode{
             goRight();
         else if (x < -0.3)
             goLeft();
-        if(buttonUp)
+ /*       if(buttonUp)      dpad
             moveForward();
         if(buttonDown)
             moveBackward();
         if(buttonLeft)
             goLeft();
         if(buttonRight)
-            goRight();
-
-
-
+            goRight(); */
+        else
+            stop();
     }
 
+    public void stop(){
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
+    }
     public void moveForward() {
         frontRight.setPower(powerInput);
         frontLeft.setPower(powerInput);
@@ -76,7 +81,7 @@ public class ArhanNew extends OpMode{
 
     public void goRight() {
         frontRight.setPower(-1 * powerInput);
-        frontLeft.setPower( powerInput);
+        frontLeft.setPower(powerInput);
         backRight.setPower( powerInput);
         backLeft.setPower(-1 * powerInput);
     }

@@ -39,30 +39,20 @@ public class arhanCode extends OpMode {
     @Override
     public void loop() {
 
-        this.input = gamepad1.a;
         double y = gamepad1.right_stick_y;
         double x = gamepad1.right_stick_x;
         double z = gamepad1.left_stick_x;
-        boolean trigger =
 
         if (y > 0.3)
             moveForward();
         else if (y < -0.3)
             moveBackward();
-
-      /*  if(y > 0.3)
-            moveForward();
-        else if(y < -0.3)
-            moveBackward();
-
-        double x = gamepad1.right_stick_x;
-
         if(x > 0.3) {
             goRight();
         } else if(x < -0.3) {
             goLeft();
         }
-*/
+
 
         /*double power = gamepad1.right_stick_y; //as you move the joy-con R thing it records how much u move
         double x = gamepad1.left_stick_x;
