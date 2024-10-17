@@ -19,6 +19,9 @@ public class autoTest extends OpMode {
 
     @Override
     public void loop() {
+        pY1 = gamepad1.right_stick_y; //mapping power variable to right stick up and down
+        pX1 = gamepad1.right_stick_x; //mapping power variable to right stick left and right
+
         if (pX1 >= 0.3 && pY1 >= 0.3) { //runs goForwardRight when right stick is pushed right and up
             goForwardRight();
         }
@@ -44,10 +47,7 @@ public class autoTest extends OpMode {
             goLeft();
         }
         else {
-            frontRight.setPower(0);
-            frontLeft.setPower(0);
-            backRight.setPower(0);
-            backLeft.setPower(0);
+            setPowerZero();
         }
     } //idk
 
@@ -66,54 +66,61 @@ public class autoTest extends OpMode {
     }
 
     public void goForward() { //go forward
-        backLeft.setPower(pY1);
-        frontLeft.setPower(pY1);
-        backRight.setPower(pY1);
-        frontRight.setPower(pY1);
+        backLeft.setPower(0.5);
+        frontLeft.setPower(0.5);
+        backRight.setPower(0.5);
+        frontRight.setPower(0.5);
     }
 
     public void goBackward() { //go backward
-        backLeft.setPower(-1 * pY1);
-        frontLeft.setPower(-1 * pY1);
-        backRight.setPower(-1 * pY1);
-        frontRight.setPower(-1 * pY1);
+        backLeft.setPower(-0.5);
+        frontLeft.setPower(-0.5);
+        backRight.setPower(-0.5);
+        frontRight.setPower(-0.5);
     }
 
     public void goRight() { //go right
-        frontRight.setPower(pY1);
-        frontLeft.setPower((pY1));
-        backRight.setPower(pY1);
-        backLeft.setPower(pY1);
+        frontRight.setPower(-0.5);
+        frontLeft.setPower(0.5);
+        backRight.setPower(0.5);
+        backLeft.setPower(-0.5);
     }
 
     public void goLeft() { //go left
-        frontLeft.setPower(pY1);
-        frontRight.setPower(pY1);
-        backLeft.setPower(pY1);
-        backRight.setPower(pY1);
+        frontLeft.setPower(-0.5);
+        frontRight.setPower(0.5);
+        backLeft.setPower(0.5);
+        backRight.setPower(-0.5);
     }
 
     public void goForwardRight() { // go forward and right
-        frontLeft.setPower(pY1);
-        backRight.setPower(pY1);
+        frontLeft.setPower(0.5);
+        backRight.setPower(0.5);
     }
 
     public void goForwardLeft() { //go forward and left
-        frontRight.setPower(pY1);
-        backLeft.setPower(pY1);
+        frontRight.setPower(0.5);
+        backLeft.setPower(0.5);
     }
 
     public void goBackwardRight() { //go backward and right
-        frontLeft.setPower(pY1);
-        backRight.setPower(pY1);
+        frontRight.setPower(-0.5);
+        backLeft.setPower(-0.5);
     }
 
     public void goBackwardLeft() { //go backward and left
-        frontRight.setPower(pY1);
-        backLeft.setPower(pY1);
+        frontLeft.setPower(-0.5);
+        backRight.setPower(-0.5);
+    }
+
+    public void setPowerZero() {
+        frontRight.setPower(0);
+        frontLeft.setPower(0);
+        backRight.setPower(0);
+        backLeft.setPower(0);
     }
 }
-    /* public void intakeSpinIn() { //spin intake wheel to put brick in
+/*  public void intakeSpinIn() { //spin intake wheel to put brick in
         intake.setPower(iY1);
     }
     public void intakeSpinOut() { //spin intake wheel to spit brick out
