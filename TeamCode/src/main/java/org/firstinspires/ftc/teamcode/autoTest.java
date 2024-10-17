@@ -22,26 +22,32 @@ public class autoTest extends OpMode {
         if (pX1 >= 0.3 && pY1 >= 0.3) { //runs goForwardRight when right stick is pushed right and up
             goForwardRight();
         }
-        if (pX1 <= -0.3 && pY1 >= 0.3) { //runs goForwardLeft when right stick is pushed left and up
+        else if (pX1 <= -0.3 && pY1 >= 0.3) { //runs goForwardLeft when right stick is pushed left and up
             goForwardLeft();
         }
-        if (pX1 >= 0.3 && pY1 <= -0.3) { //runs goBackwardRight when right stick is pushed right and down
+        else if (pX1 >= 0.3 && pY1 <= -0.3) { //runs goBackwardRight when right stick is pushed right and down
             goBackwardRight();
         }
-        if (pX1 <= -0.3 && pY1 <= -0.3) { //runs goBackwardLeft when right stick is pushed left and down
+        else if (pX1 <= -0.3 && pY1 <= -0.3) { //runs goBackwardLeft when right stick is pushed left and down
             goBackwardLeft();
         }
-        if (pY1 >= 0.3) { //runs goForward when right stick is pushed up
+        else if (pY1 >= 0.3) { //runs goForward when right stick is pushed up
             goForward();
         }
-        if (pY1 <= -0.3) { //runs goBackward when right stick is pushed down
+        else if (pY1 <= -0.3) { //runs goBackward when right stick is pushed down
             goBackward();
         }
-        if (pX1 >= 0.3) { //runs goRight when right stick is pushed right
+        else if (pX1 >= 0.3) { //runs goRight when right stick is pushed right
             goRight();
         }
-        if (pX1 <= 0.3) { // runs goLeft when right stick is pushed left
+        else if (pX1 <= 0.3) { // runs goLeft when right stick is pushed left
             goLeft();
+        }
+        else {
+            frontRight.setPower(0);
+            frontLeft.setPower(0);
+            backRight.setPower(0);
+            backLeft.setPower(0);
         }
     } //idk
 
