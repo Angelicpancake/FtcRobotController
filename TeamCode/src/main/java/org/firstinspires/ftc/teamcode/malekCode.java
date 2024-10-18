@@ -44,19 +44,27 @@ public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
         double leftStickX= gamepad1.left_stick_x;
         double leftStickY = gamepad1.left_stick_y;
 
-        if(buttonUp){
+        if(leftStickY < -0.3){
             goBackwards();
 
-        } else if (buttonDown){
+        } else if (leftStickY > 0.3){
             goForward();
-        } else if (buttonLeft) {
-            goLeft();
-        } else if (buttonRight) {
+        } else if (leftStickX < -0.3) {
             goRight();
-        } else if (rightStickX > 0.3) {
-            turnClockwise();
-        } else if (rightStickX < -0.3) {
+        } else if(leftStickX > 0.3){
+            goLeft();
+        }
+        else if (rightStickX > 0.3) {
             turnCounterClockwise();
+        } else if (rightStickX < -0.3) {
+
+            turnClockwise();
+        } else
+        {
+            backL.setPower(0);
+            backR.setPower(0);
+            frontL.setPower(0);
+            frontR.setPower(0);
         } //else if (buttonA) {
 //            intake();
 //        } else if (buttonX) {
