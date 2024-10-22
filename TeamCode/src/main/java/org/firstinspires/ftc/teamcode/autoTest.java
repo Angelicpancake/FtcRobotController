@@ -13,14 +13,22 @@ public class autoTest extends OpMode {
     private DcMotor frontRight; //making front right motor
     private static double pY1; //making power variable
     private static double pX1; //making power variable
-    private static double iY1; //making intake variable
-    private static double iX1; //making intake variable
+    private static double lY1; //making intake variable
+    private static double lX1; //making intake variable
 //    private DcMotor intake; //making intake motor
 
     @Override
     public void loop() {
         pY1 = gamepad1.right_stick_y; //mapping power variable to right stick up and down
         pX1 = gamepad1.right_stick_x; //mapping power variable to right stick left and right
+        lX1 = gamepad1.left_stick_x;
+
+        if (lX1 >= 0.3) {
+            rotateRight();
+        }
+        else if (lX1 <= -0.3) {
+            rotateLeft();
+        }
 
         if (pX1 >= 0.3 && pY1 >= 0.3) { //runs goForwardRight when right stick is pushed right and up
             goForwardRight();
@@ -112,7 +120,18 @@ public class autoTest extends OpMode {
         frontLeft.setPower(-0.5);
         backRight.setPower(-0.5);
     }
-
+    public void rotateRight() {
+        frontLeft.setPower(0.5);
+        frontRight.setPower(-0.5);
+        backRight.setPower(-0.5);
+        backLeft.setPower(0.5);
+    }
+    public void rotateLeft() {
+        frontLeft.setPower(-0.5);
+        frontRight.setPower(0.5);
+        backLeft.setPower(-0.5);
+        backRight.setPower(0.5);
+    }
     public void setPowerZero() {
         frontRight.setPower(0);
         frontLeft.setPower(0);
