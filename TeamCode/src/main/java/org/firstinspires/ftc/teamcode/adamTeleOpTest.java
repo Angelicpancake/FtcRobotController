@@ -2,10 +2,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 @TeleOp (name = "Adam :)")
-public class autoTest extends OpMode {
+public class adamTeleOpTest extends OpMode {
 
     private DcMotor backLeft; //making back left motor
     private DcMotor frontLeft; //making front left motor
