@@ -40,7 +40,7 @@ public class autoJoshua extends LinearOpMode {
     }
 
     // Method to move motors by setting their target positions
-    
+
     public void moveMotors(int backL, int backR, int frontL, int frontR) {
         resetEncoders(); // Reset encoders before setting the target positions
 
