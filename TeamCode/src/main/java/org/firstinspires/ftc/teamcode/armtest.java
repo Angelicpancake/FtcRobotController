@@ -35,7 +35,7 @@ public class armtest extends OpMode {
 
         // Display telemetry data for debugging
         telemetry.addData("Power", power);
-        telemetry.addData("Arm Position", cP);
+        telemetry.addData("Arm Position", arm.getCurrentPosition());
         telemetry.update();
     }
 }
