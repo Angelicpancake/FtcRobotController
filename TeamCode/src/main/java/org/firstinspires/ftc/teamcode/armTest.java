@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="Adam Arm Test :)")
-public class armtest extends OpMode {
+public class armTest extends OpMode {
     private DcMotor backLeft; //making back left motor
     private DcMotor frontLeft; //making front left motor
     private DcMotor backRight; //making back right motor
@@ -41,13 +41,17 @@ public class armtest extends OpMode {
 
         backLeft.setDirection(DcMotorSimple.Direction.REVERSE); //reversing left side cuz mecanum wheels
         frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
     }
+
     public void armUp() {
         arm.setPower(0.5);
     }
+
     public void armDown() {
         arm.setPower(-0.5);
     }
+
     public void armOff() {
         arm.setPower(0);
     }
