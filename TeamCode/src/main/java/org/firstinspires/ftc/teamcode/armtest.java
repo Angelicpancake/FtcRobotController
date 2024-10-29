@@ -25,7 +25,7 @@ public class armtest extends OpMode {
         if (power > 0.3) {
             arm.setPower(0.4);  // fixed power for upward motion
         } else if (power < -0.3) {
-            arm.setPower(-0.4); // fixed power for downward motion
+            arm.setPower(-0.2); // fixed power for downward motion
         } else {
             arm.setPower(0); // stop the motor if within deadzone
         }
