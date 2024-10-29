@@ -3,13 +3,17 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+
 
 @TeleOp(name="Gaurang")
 public class ArmTelemetry extends OpMode {
     //initialization
     private DcMotor arm;
+    private Servo claw;
+
 
 
 
@@ -39,7 +43,7 @@ public class ArmTelemetry extends OpMode {
         if (armPower > 0.3) {
             arm.setPower(0.4);  // up
         } else if (armPower < -0.3) {
-            arm.setPower(-0.4); // down
+            arm.setPower(-0.3); // down
         } else {
             arm.setPower(0); // deadzone
         }
