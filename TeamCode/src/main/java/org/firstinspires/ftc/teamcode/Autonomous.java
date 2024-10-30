@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "autoJoshua")
 public class Autonomous extends LinearOpMode {
-
+// need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor backLeft;
