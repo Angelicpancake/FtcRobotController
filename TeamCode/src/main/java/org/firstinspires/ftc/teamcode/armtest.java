@@ -1,41 +1,58 @@
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name="Joshua2' Arm")
-public class armtest extends OpMode {
+@TeleOp(name="Adam Arm Test :)")
+public class armTest extends OpMode {
+    private DcMotor backLeft; //making back left motor
+    private DcMotor frontLeft; //making front left motor
+    private DcMotor backRight; //making back right motor
+    private DcMotor frontRight; //making front right motor
     private DcMotor arm;
+    private static double rSY;
+    private static int armPosition;
 
-    @Override
-    public void init(){
-        arm = hardwareMap.get(DcMotor.class, "arm");
 
-        // Reset encoder and use it for motor position tracking
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-    }
-
-    @Override
     public void loop() {
-        double power = gamepad1.left_stick_y;
+        rSY = gamepad1.right_stick_y;
 
-        // Apply power to the arm motor based on joystick movement with a deadzone of 0.3
-        if (power > 0.3) {
-            arm.setPower(0.4);  // fixed power for upward motion
-        } else if (power < -0.3) {
-            arm.setPower(-0.2); // fixed power for downward motion
+        if (rSY >= 0.3) {
+            armUp();
+        } else if (rSY <= -0.3) {
+            armDown();
         } else {
-            arm.setPower(0); // stop the motor if within deadzone
+            armOff();
         }
 
-        // Get the current position from the motor's encoder
-        int cP = arm.getCurrentPosition();
-
-        // Display telemetry data for debugging
-        telemetry.addData("Power", power);
-        telemetry.addData("Arm Position", arm.getCurrentPosition());
+        armPosition = arm.getCurrentPosition();
+        telemetry.addData("Power", rSY);
+        telemetry.addData("Arm Position", armPosition);
         telemetry.update();
+    }
+
+    public void init() {
+        backLeft = hardwareMap.get(DcMotor.class, "backLeft"); //mapping motors
+        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
+        backRight = hardwareMap.get(DcMotor.class, "backRight");
+        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
+        arm = hardwareMap.get(DcMotor.class, "arm");
+
+        backLeft.setDirection(DcMotorSimple.Direction.REVERSE); //reversing left side cuz mecanum wheels
+        frontLeft.setDirection(DcMotorSimple.Direction.REVERSE);
+
+    }
+
+    public void armUp() {
+        arm.setPower(0.5);
+    }
+
+    public void armDown() {
+        arm.setPower(-0.5);
+    }
+
+    public void armOff() {
+        arm.setPower(0);
     }
 }
