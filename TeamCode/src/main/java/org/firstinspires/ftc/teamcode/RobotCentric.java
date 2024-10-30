@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp(name="JoshuaTeleOp")
-public class movementTest extends OpMode{
+public class RobotCentric extends OpMode{
     private static DcMotor frontLeft;
     private static DcMotor backLeft;
     private static DcMotor frontRight;

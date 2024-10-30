@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="Adam Arm Test :)")
-public class armTest extends OpMode {
+public class Arm extends OpMode {
     private DcMotor backLeft; //making back left motor
     private DcMotor frontLeft; //making front left motor
     private DcMotor backRight; //making back right motor

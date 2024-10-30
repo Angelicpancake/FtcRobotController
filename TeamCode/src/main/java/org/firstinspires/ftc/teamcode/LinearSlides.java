@@ -4,10 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 @TeleOp(name="Joshua Linear Slide")
-public class linearSlidesTest extends OpMode {
+public class LinearSlides extends OpMode {
 //op mode -> real time control, linearOp -> preset commands (auto)
     private DcMotor linearSlide1;
     private DcMotor linearSlide2;
