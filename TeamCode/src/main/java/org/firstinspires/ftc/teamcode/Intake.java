@@ -11,6 +11,7 @@ public class Intake extends OpMode
     private DcMotor intake;
     private double input;
 
+
     public void init()
     {
         intake = hardwareMap.get(DcMotor.class, "intake");
