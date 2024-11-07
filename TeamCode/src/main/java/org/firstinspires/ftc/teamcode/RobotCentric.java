@@ -1,157 +1,164 @@
 package org.firstinspires.ftc.teamcode;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.hardwareMap;
+
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name="JoshuaTeleOp")
-public class RobotCentric extends OpMode{
-    private static DcMotor frontLeft;
-    private static DcMotor backLeft;
-    private static DcMotor frontRight;
-    private static DcMotor backRight;
-    private static DcMotor arm;
+@TeleOp (name ="Malek")
+public class malekCode extends OpMode {//linearop - autonomous/ teleop -> opmode
 
-    public void init() {
-        frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
-        arm = hardwareMap.get(DcMotor.class, "arm");
+    private DcMotor backL;
+    private DcMotor backR;
+    private DcMotor frontL;
+    private DcMotor frontR;
+//    private DcMotor intake;
+    private double powerInput;
+    
 
-        frontLeft.setDirection(DcMotor.Direction.REVERSE);
-        frontRight.setDirection(DcMotor.Direction.FORWARD);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.FORWARD);
-    }
+
     @Override
-    public void loop() {
-        if (gamepad1.left_stick_y > 0.3) {
-            frontLeft.setPower(0.6);
-            backLeft.setPower(0.6);
-            frontRight.setPower(0.6);
-            backRight.setPower(0.6);
-        }
+    public void loop(){
 
-        if (gamepad1.left_stick_y < -0.3) {
-            frontLeft.setPower(0.6);
-            backLeft.setPower(0.6);
-            frontRight.setPower(0.6);
-            backRight.setPower(0.6);
-        }
+        double rightTrigger = gamepad1.right_trigger;
+        double leftTrigger = gamepad1.left_trigger;
 
-        if (0.3 > gamepad1.left_stick_y && gamepad1.left_stick_y > -0.3) {
-            frontLeft.setPower(0);
-            backLeft.setPower(0);
-            frontRight.setPower(0);
-            backRight.setPower(0);
-        }
+        boolean rightBumber = gamepad1.right_bumper;
+        boolean leftBumber = gamepad1.left_bumper;
 
-        if (gamepad1.left_stick_x >= 0.3) {
-            strafeRight();
-        }
+        boolean buttonUp = gamepad1.dpad_up;
+        boolean buttonDown = gamepad1.dpad_down;
+        boolean buttonRight = gamepad1.dpad_right;
+        boolean buttonLeft = gamepad1.dpad_left;
 
-        if (gamepad1.left_stick_x <= 0.3) {
-            strafeLeft();
-        }
+        boolean buttonA = gamepad1.a;
+        boolean buttonX = gamepad1.x;
 
-        if (0.3 > gamepad1.left_stick_x && gamepad1.left_stick_x > -0.3) {
-            frontLeft.setPower(0);
-            backLeft.setPower(0);
-            frontRight.setPower(0);
-            backRight.setPower(0);
-        }
+        double rightStickX = gamepad1.right_stick_x;
+        double rightStickY = gamepad1.right_stick_y;
 
-        if (gamepad1.left_bumper) {
-            turnLeft();
-        }
+        double leftStickX= gamepad1.left_stick_x;
+        double leftStickY = gamepad1.left_stick_y;
 
-        if (gamepad1.right_bumper) {
-            turnRight();
-        }
+        if(leftStickY < -0.3){
+            goBackwards();
 
-        if (gamepad1.left_stick_x < 0.3 && gamepad1.left_stick_y < 0.3) {
-            moveBackLeft();
+        } else if (leftStickY > 0.3){
+            goForward();
+        } else if (leftStickX < -0.3) {
+            goRight();
+        } else if(leftStickX > 0.3){
+            goLeft();
         }
+        else if (rightStickX > 0.3) {
+            turnCounterClockwise();
+        } else if (rightStickX < -0.3) {
 
-        if (gamepad1.left_stick_x < 0.3 && gamepad1.left_stick_y > 0.3) {
-            moveFrontLeft();
-        }
+            turnClockwise();
+        } else
+        {
+            backL.setPower(0);
+            backR.setPower(0);
+            frontL.setPower(0);
+            frontR.setPower(0);
+        } //else if (buttonA) {
+//            intake();
+//        } else if (buttonX) {
+//            release();
+//        }
 
-        if (gamepad1.left_stick_x > 0.3 && gamepad1.left_stick_y < 0.3) {
-            moveBackRight();
-        }
 
-        if (gamepad1.left_stick_x > 0.3 && gamepad1.left_stick_y > 0.3) {
-            moveFrontRight();
-        }
-
-        if (gamepad2.left_stick_y >= 0.3) {
-            moveArm(0.8);
-        }
-
-        if (gamepad2.left_stick_y <= 0.3) {
-            moveArm(-0.8);
-        }
     }
 
-    public void strafeLeft() {
-        frontLeft.setPower(-0.6);
-        backLeft.setPower(0.6);
-        frontRight.setPower(0.6);
-        backRight.setPower(-0.6);
+//    public void intake(){
+//        intake.setPower(-powerInput);
+//    }
+//    public void release(){
+//        intake.setPower(-powerInput);
+//    }
+    public void goForward(){
+        backL.setPower(powerInput);
+        backR.setPower(powerInput);
+        frontL.setPower(powerInput);
+        frontR.setPower(powerInput);
     }
 
-    public void strafeRight() {
-        frontLeft.setPower(0.6);
-        backLeft.setPower(-0.6);
-        frontRight.setPower(-0.6);
-        backRight.setPower(0.6);
+    public void goBackwards(){
+        backL.setPower(-powerInput);
+        backR.setPower(-powerInput);
+        frontL.setPower(-1 * powerInput);
+        frontR.setPower(-1 * powerInput);
     }
 
-    public void turnLeft() {
-        frontLeft.setPower(-0.6);
-        backLeft.setPower(-0.6);
-        frontRight.setPower(-0.6);
-        backRight.setPower(-0.6);
+    public void goLeft(){
+        backL.setPower(powerInput);
+        backR.setPower(-1 * powerInput);
+        frontL.setPower(-1 * powerInput);
+        frontR.setPower(powerInput);
     }
 
-    public void turnRight() {
-        frontLeft.setPower(0.6);
-        backLeft.setPower(0.6);
-        frontRight.setPower(0.6);
-        backRight.setPower(0.6);
+    public void goRight(){
+        backL.setPower(-1 * powerInput);
+        backR.setPower(powerInput);
+        frontL.setPower(powerInput);
+        frontR.setPower(-1 * powerInput);
     }
 
-    public void moveFrontRight() {
-        frontLeft.setPower(0);
-        backLeft.setPower(0.6);
-        frontRight.setPower(0.6);
-        backRight.setPower(0);
+    public void goDiagonalRightForward(){
+        frontL.setPower(powerInput);
+        backR.setPower(powerInput);
     }
 
-    public void moveBackRight() {
-        frontLeft.setPower(0);
-        backLeft.setPower(-0.6);
-        frontRight.setPower(-0.6);
-        backRight.setPower(0);
+    public void goDiagonalRightBackwards(){
+        frontL.setPower(-1 * powerInput);
+        backR.setPower(-1 * powerInput);
+
     }
 
-    public void moveFrontLeft() {
-        frontLeft.setPower(0.6);
-        backLeft.setPower(0);
-        frontRight.setPower(0);
-        backRight.setPower(0.6);
+    public void goDiagonalLeftForwards(){
+        frontR.setPower(powerInput);
+        backL.setPower(powerInput);
+
     }
 
-    public void moveBackLeft() {
-        frontLeft.setPower(-0.6);
-        backLeft.setPower(0);
-        frontRight.setPower(0);
-        backRight.setPower(-0.6);
+    public void goDiagonalLeftBackwards(){
+        frontL.setPower(-1 * powerInput);
+        backR.setPower(-1 * powerInput);
+
     }
 
-    public void moveArm(double speed) {
-        arm.setPower(0.8);
+    public void turnClockwise(){
+        backR.setPower(-powerInput);
+        frontR.setPower(-powerInput);
+        backL.setPower(powerInput);
+        frontL.setPower(powerInput);
     }
+
+    public void turnCounterClockwise(){
+        backR.setPower(powerInput);
+        frontR.setPower(powerInput);
+        backL.setPower(-powerInput);
+        frontL.setPower(-powerInput);
+
+    }
+
+    @Override
+    public void init(){
+        backL = hardwareMap.get(DcMotor.class, "backLeft");
+        backR = hardwareMap.get(DcMotor.class, "backRight");
+        frontL = hardwareMap.get(DcMotor.class, "frontLeft");
+        frontR = hardwareMap.get(DcMotor.class, "frontRight");
+//        intake = hardwareMap.get(DcMotor.class, "intake");
+
+        powerInput = 1;
+
+        frontR.setDirection(DcMotor.Direction.REVERSE);
+        backR.setDirection(DcMotorSimple.Direction.REVERSE);
+
+    }
+
 }
