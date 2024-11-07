@@ -13,7 +13,6 @@ public class Autonomous extends LinearOpMode {
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
     private static final int TICKS_PER_TILE = 1060;
--
     @Override
     public void runOpMode() {
         // Initialize motors
