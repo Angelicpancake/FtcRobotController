@@ -8,11 +8,11 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 
-@TeleOp(name="Gaurang")
+@TeleOp(name="JinkaArmFix")
 public class ArmTelemetry extends OpMode {
     //initialization
     private DcMotor arm;
-    private Servo claw;
+
 
 
 
@@ -30,9 +30,28 @@ public class ArmTelemetry extends OpMode {
 
 
 
-        //calculating telemetry
-        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        //arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //allows you to directly set the motor power without
+        //looking at the encoder
+        //it'll still keep track of encoder values
+
+        //arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //Allows you to set the speed of the motor
+        //it will look at the encoder values and use
+        //a pit loop to make sure it's
+        //traveling at the right speed
+
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //allows you to set a target positions
+        //which the motor will automatically go to
+        //and hold its position there
+
+        //arm.setMode(DcMotor.RunMode.RESET_ENCODERS);
+        //just resets encoder value to 0
+
+
+
     }
 
     @Override
