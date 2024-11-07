@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp ")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class TeleOp extends OpMode
 {
     private DcMotor backLeft;
@@ -64,6 +64,8 @@ public class TeleOp extends OpMode
             turnLeft(movePower);
         else if (turningR)
             turnRight(movePower);
+        else
+            stopMotors();
     }
 
     /*
@@ -88,10 +90,10 @@ public class TeleOp extends OpMode
 
     private void turnLeft(double power)
     {
-        frontLeft.setPower(power);
-        frontRight.setPower(-power);
-        backRight.setPower(-power);
-        backLeft.setPower(power);
+        frontLeft.setPower(-power);
+        frontRight.setPower(power);
+        backRight.setPower(power);
+        backLeft.setPower(-power);
     }
 
     private void turnRight(double power)
@@ -100,6 +102,12 @@ public class TeleOp extends OpMode
         frontLeft.setPower(power);
         backLeft.setPower(power);
         backRight.setPower(-power);
+    }
+    private void stopMotors() {
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
     }
 }
 
