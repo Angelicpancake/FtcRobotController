@@ -2,15 +2,18 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp ")
+@com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "TeleOp")
 public class TeleOp extends OpMode
 {
     private DcMotor backLeft;
     private DcMotor frontLeft;
     private DcMotor backRight;
     private DcMotor frontRight;
-    private DcMotor intake;
+    private DcMotor arm;
+
+    private Servo claw;
 
     public static double intakePower = 1.0;
     public static double movePower = 1.0;
@@ -21,7 +24,8 @@ public class TeleOp extends OpMode
         backRight = hardwareMap.get(DcMotor.class, "backRight");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        intake = hardwareMap.get(DcMotor.class, "intake");
+        arm = hardwareMap.get(DcMotor.class, "arm");
+        claw = hardwareMap.get(Servo.class, "claw");
 
         backRight.setDirection(DcMotor.Direction.REVERSE);
         frontRight.setDirection(DcMotor.Direction.REVERSE);
@@ -38,9 +42,9 @@ public class TeleOp extends OpMode
         boolean turningR = gamepad1.right_bumper; //right bumper
 
         if (intakeInput > 0.3)
-            intake.setPower(intakePower);
+            arm.setPower(intakePower);
         else if (intakeInput < -0.3)
-            intake.setPower(-intakePower);
+            arm.setPower(-intakePower);
         /* intake section of code: if you move rightStickY power > 0.3 then setPower > 0 value
                                    if you move rightStickY power < -0.3 then setPower < 0 value
                                    0.3 value is to make small accidental movements not taken
@@ -60,6 +64,8 @@ public class TeleOp extends OpMode
             turnLeft(movePower);
         else if (turningR)
             turnRight(movePower);
+        else
+            stopMotors();
     }
 
     /*
@@ -84,10 +90,10 @@ public class TeleOp extends OpMode
 
     private void turnLeft(double power)
     {
-        frontLeft.setPower(power);
-        frontRight.setPower(-power);
-        backRight.setPower(-power);
-        backLeft.setPower(power);
+        frontLeft.setPower(-power);
+        frontRight.setPower(power);
+        backRight.setPower(power);
+        backLeft.setPower(-power);
     }
 
     private void turnRight(double power)
@@ -97,11 +103,11 @@ public class TeleOp extends OpMode
         backLeft.setPower(power);
         backRight.setPower(-power);
     }
-
-
-
-
-
-
+    private void stopMotors() {
+        frontLeft.setPower(0);
+        frontRight.setPower(0);
+        backLeft.setPower(0);
+        backRight.setPower(0);
+    }
 }
 
