@@ -33,8 +33,12 @@ public class LinearArmTest extends OpMode{
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+
+        //the motor will do no automatic action
+        //but the encoder will still count
         arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         LinearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
 
         //setting target position before using
         //run to position
@@ -53,6 +57,8 @@ public class LinearArmTest extends OpMode{
 
 
     }
+
+
 
     @Override
     public void loop(){

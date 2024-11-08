@@ -32,6 +32,9 @@ public class ArmTelemetry extends OpMode {
 
         //resets the encoders before using them
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //the motor will do no automatic action
+        //but the encoder will still count
         arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //initial position
