@@ -78,12 +78,12 @@ public class LinearArmTest extends OpMode{
 
         //movement for Linear slide
         //moving forward
-        if (gamepad2.left_stick_y < -0.1 && LinearSlide.getCurrentPosition()< 3000) {
+        if (gamepad1.left_stick_y < -0.1 && LinearSlide.getCurrentPosition()< 3000) {
             LinearSlide.setPower(LinearPower);
             LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition());
         }
         //reversing
-        else if (gamepad2.left_stick_y > 0.1 && LinearSlide.getCurrentPosition() > 3) {
+        else if (gamepad1.left_stick_y > 0.1 && LinearSlide.getCurrentPosition() > 3) {
             LinearSlide.setPower(-LinearPower);
             LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition());
 
