@@ -33,6 +33,9 @@ public class LinearArmTest extends OpMode{
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LinearSlide.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
+        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        LinearSlide.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         //setting target position before using
         //run to position
         arm.setTargetPosition(0);
@@ -71,28 +74,35 @@ public class LinearArmTest extends OpMode{
         //moving forward
         if (gamepad2.left_stick_y < -0.1 && LinearSlide.getCurrentPosition()< 3000) {
             LinearSlide.setPower(LinearPower);
+            LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition());
         }
         //reversing
         else if (gamepad2.left_stick_y > 0.1 && LinearSlide.getCurrentPosition() > 3) {
             LinearSlide.setPower(-LinearPower);
+            LinearSlide.setTargetPosition(LinearSlide.getCurrentPosition());
+
         }
         //set the power to 0 if there is no input
         else {
-            LinearSlide.setPower(0);
+            LinearSlide.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            LinearSlide.setPower(0.3);
         }
 
         //movement for Arm
         //moving up
         if (armPower > 0.3) {
             arm.setPower(0.4);
+            arm.setTargetPosition(arm.getCurrentPosition());
         }
         //moving down
         else if (armPower < -0.3) {
             arm.setPower(-0.3);
+            arm.setTargetPosition(arm.getCurrentPosition());
         }
         //set the power to 0 if there is no input
         else {
-            arm.setPower(0);
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            arm.setPower(0.3);
         }
 
 

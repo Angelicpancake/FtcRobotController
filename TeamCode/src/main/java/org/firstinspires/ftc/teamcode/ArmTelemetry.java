@@ -32,6 +32,7 @@ public class ArmTelemetry extends OpMode {
 
         //resets the encoders before using them
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //initial position
         arm.setTargetPosition(10);
@@ -65,11 +66,18 @@ public class ArmTelemetry extends OpMode {
         double armPower = gamepad1.left_stick_x;
 
         if (armPower > 0.3) {
-            arm.setPower(0.4);  // up
-        } else if (armPower < -0.3) {
-            arm.setPower(-0.3); // down
-        } else {
-            arm.setPower(0); // deadzone
+            arm.setPower(0.4);
+            arm.setTargetPosition(arm.getCurrentPosition());
+        }
+        //moving down
+        else if (armPower < -0.3) {
+            arm.setPower(-0.3);
+            arm.setTargetPosition(arm.getCurrentPosition());
+        }
+        //set the power to 0 if there is no input
+        else {
+            arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            arm.setPower(0.3);
         }
 
         //telemetry
