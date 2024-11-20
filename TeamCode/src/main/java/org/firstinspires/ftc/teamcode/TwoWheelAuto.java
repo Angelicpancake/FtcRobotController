@@ -4,13 +4,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "autoJoshua")
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "AdamAuto")
 public class TwoWheelAuto extends LinearOpMode {
     // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
-    private DcMotor backLeft;
-    private DcMotor backRight;
     private DcMotor arm;
     private Servo claw;
     private static final double CLAW_OPEN = 0.0;
@@ -23,22 +21,20 @@ public class TwoWheelAuto extends LinearOpMode {
         // Initialize motors
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
-        backLeft = hardwareMap.get(DcMotor.class, "backLeft");
-        backRight = hardwareMap.get(DcMotor.class, "backRight");
         arm = hardwareMap.get(DcMotor.class, "arm");
         claw = hardwareMap.get(Servo.class, "claw");
 
-        // Reverse the right motors so that forward is forward for all motors
         frontRight.setDirection(DcMotor.Direction.REVERSE);
-        backRight.setDirection(DcMotor.Direction.REVERSE);
+
+        // Reverse the right motors so that forward is forward for all motors
 
         // Wait for the driver to press start
         waitForStart();
 
-        moveArm(-1500);
+        moveArm(1385 );
         moveForward(1400);
         moveArm(-200);
-        moveBackward(100);
+        moveForward(100);;
         moveArm(1000);
         clawOpen();
         rotateLeft(1500);
@@ -88,22 +84,22 @@ public class TwoWheelAuto extends LinearOpMode {
 
     // Method to move forward
     public void moveForward(int distance) {
-        moveMotors(distance, distance);
+        moveMotors(-distance, -distance);
     }
 
     // Method to move backward
     public void moveBackward(int distance) {
-        moveMotors(-distance, -distance);
+        moveMotors(distance, distance);
     }
 
     // Method to rotate right
     public void rotateLeft(int distance) { // Rotate clockwise
-        moveMotors(-distance, distance);
+        moveMotors(distance, -distance);
     }
 
     // Method to rotate left
     public void rotateRight(int distance) { // Rotate counter-clockwise
-        moveMotors(distance, -distance);
+        moveMotors(-distance, distance);
     }
 
     // Method to move motors by setting their target positions
