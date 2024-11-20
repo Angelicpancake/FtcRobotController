@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "autoJoshua")
-public class Autonomous extends LinearOpMode {
-// need to make parameter for choosing left side or right side when we start
+public class TwoWheelAuto extends LinearOpMode {
+    // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor backLeft;
@@ -35,59 +35,90 @@ public class Autonomous extends LinearOpMode {
         // Wait for the driver to press start
         waitForStart();
 
+        moveArm(-1500);
         moveForward(1400);
         moveArm(-200);
         moveBackward(100);
-        openClaw();
-        moveLeft(1000);
-        rotateRight(1000);
+        moveArm(1000);
+        clawOpen();
+        rotateLeft(1500);
         moveForward(1000);
+        moveArm(-1500);
+        clawClose();
+        moveArm(700);
+        rotateLeft(1500);
+        moveForward(900);
+        rotateRight(300);
+        moveArm(-300);
+        clawOpen();
+        moveArm(1200);
+        rotateRight(2700);
     }
 
     // Method to move forward a certain distance (in ticks)
-    public void moveForward(int distance) {
-        moveMotors(distance, distance, distance, distance);
-    }
-    public void moveBackward(int distance) {
-        moveMotors(-distance, -distance, -distance, -distance);
-    }
-    public void moveArm(int distance) {
-        arm.setTargetPosition(distance);
-    }
-    public void openClaw() {
-        claw.setPosition(CLAW_OPEN);
-    }
-    public void closeClaw() {
-        claw.setPosition(CLAW_CLOSE);
-    }
-    public void moveLeft(int distance) {
-        moveMotors(distance, -distance, -distance, distance);
-    }
-    public void moveRight(int distance) {
-        moveMotors(-distance, distance, distance, -distance);
-    }
-    public void rotateLeft(int distance) {
-        moveMotors(-distance, distance, -distance, distance);
-    }
-    public void rotateRight(int distance) {
-        moveMotors(distance, -distance, distance, -distance);
-    }
-    // Method to move motors by setting their target positions
+    public void moveArm(int ticks) {
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER); // Reset encoder
+        arm.setTargetPosition(ticks); // Set target position
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION); // Enable encoder control
+        arm.setPower(0.5); // Set power for arm
 
-    public void moveMotors(int backL, int backR, int frontL, int frontR) {
+        // Wait for arm to reach its target
+        while (opModeIsActive() && arm.isBusy()) {
+            telemetry.addData("Arm Status", "Moving...");
+            telemetry.update();
+            sleep(50); // Prevent loop from running too fast
+        }
+
+        arm.setPower(0); // Stop arm motor
+    }
+
+    // Method to open claw
+    public void clawOpen() {
+        claw.setPosition(CLAW_OPEN);
+        telemetry.addData("Claw", "Open");
+        telemetry.update();
+    }
+
+    // Method to close claw
+    public void clawClose() {
+        claw.setPosition(CLAW_CLOSE);
+        telemetry.addData("Claw", "Closed");
+        telemetry.update();
+    }
+
+    // Method to move forward
+    public void moveForward(int distance) {
+        moveMotors(distance, distance);
+    }
+
+    // Method to move backward
+    public void moveBackward(int distance) {
+        moveMotors(-distance, -distance);
+    }
+
+    // Method to rotate right
+    public void rotateLeft(int distance) { // Rotate clockwise
+        moveMotors(-distance, distance);
+    }
+
+    // Method to rotate left
+    public void rotateRight(int distance) { // Rotate counter-clockwise
+        moveMotors(distance, -distance);
+    }
+
+    // Method to move motors by setting their target positions
+    public void moveMotors(int leftTarget, int rightTarget) {
         resetEncoders(); // Reset encoders before setting the target positions
 
         // Set target positions
-        backLeft.setTargetPosition(backL);
-        backRight.setTargetPosition(backR);
-        frontLeft.setTargetPosition(frontL);
-        frontRight.setTargetPosition(frontR);
+        frontLeft.setTargetPosition(leftTarget);
+        frontRight.setTargetPosition(rightTarget);
 
         // Set motors to run to the target position
         setAllMotorsMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         // Set motor power to move
-        setMotorPower(0.5);
+        setMotorPower(0.4);
 
         // Wait until motors reach their target
         waitForMotors();
@@ -101,33 +132,28 @@ public class Autonomous extends LinearOpMode {
         setAllMotorsMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    // Method to wait until all motors reach their target position
+    // Method to wait until both motors reach their target position
     public void waitForMotors() {
-        // Wait until all motors are done moving to their target positions
-        while (opModeIsActive() && (backLeft.isBusy() && backRight.isBusy() && frontLeft.isBusy() && frontRight.isBusy())) {
-            telemetry.addData("Status", "Moving...");
+        while (opModeIsActive() && (frontLeft.isBusy() || frontRight.isBusy())) {
+            telemetry.addData("Status", "Motors Moving...");
             telemetry.update();
-            sleep(50); // Small delay to prevent the loop from running too fast
+            sleep(50); // Small delay to prevent loop from running too fast
         }
     }
 
-    // Helper method to set the same mode for all motors
+    // Helper method to set the same mode for both motors
     public void setAllMotorsMode(DcMotor.RunMode mode) {
-        backLeft.setMode(mode);
-        backRight.setMode(mode);
         frontLeft.setMode(mode);
         frontRight.setMode(mode);
     }
 
-    // Helper method to set the power for all motors
+    // Helper method to set the power for both motors
     public void setMotorPower(double power) {
-        backLeft.setPower(power);
-        backRight.setPower(power);
         frontLeft.setPower(power);
         frontRight.setPower(power);
     }
 
-    // Method to stop all motors
+    // Method to stop both motors
     public void stopMotors() {
         setMotorPower(0);
     }
