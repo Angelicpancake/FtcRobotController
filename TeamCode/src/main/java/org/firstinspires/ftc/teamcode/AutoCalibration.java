@@ -4,15 +4,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "two wheel mid")
-public class TwoWheelAuto extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "calibrate ")
+public class AutoCalibration extends LinearOpMode {
     // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor arm;
     private Servo claw;
-    private static final double CLAW_OPEN = 0;
-    private static final double CLAW_CLOSE = 0.6;
+    private static final double CLAW_OPEN = 0.0;
+    private static final double CLAW_CLOSE = 0.35;
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
     private static final int TICKS_PER_TILE = 1060;
@@ -31,24 +31,9 @@ public class TwoWheelAuto extends LinearOpMode {
         // Wait for the driver to press start
         waitForStart();
 
-        clawClose();
-        moveForward(800);
-        moveArm(1400);
-        moveForward(500);
-        sleep(2000);
-        clawOpen();
-        moveBackward(400);
-        moveArm(-350);
-        rotateLeft(1200);
-        moveForward(900);
-        moveArm(1250);
-        clawClose();
-        sleep(1000);
-        moveArm(-1100);
-        rotateLeft(1200);
-        moveForward(1000);
-        moveArm(300);
-        clawOpen();
+        moveArm(700); //move arm 90 degrees
+        moveForward(1130); //forward 1 tile
+        rotateLeft(2000); //rotate 90 degrees
     }
 
     // Method to move forward a certain distance (in ticks)
