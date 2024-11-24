@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "two wheel mid")
-public class TwoWheelAuto extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Left Side Park")
+public class autoLeftSide extends LinearOpMode {
     // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
@@ -35,20 +35,13 @@ public class TwoWheelAuto extends LinearOpMode {
         moveForward(800);
         moveArm(1400);
         moveForward(500);
-        sleep(2000);
+        sleep(1000);
         clawOpen();
         moveBackward(400);
-        moveArm(-350);
-        rotateLeft(1200);
-        moveForward(900);
-        moveArm(1250);
         clawClose();
-        sleep(1000);
-        moveArm(-1100);
-        rotateLeft(1200);
-        moveForward(1000);
-        moveArm(300);
-        clawOpen();
+        moveArm(-1500);
+        rotateLeft(2200);
+        moveForward(1450);
     }
 
     // Method to move forward a certain distance (in ticks)

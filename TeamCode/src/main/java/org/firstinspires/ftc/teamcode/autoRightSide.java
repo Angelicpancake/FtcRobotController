@@ -1,18 +1,18 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "AdamAuto")
-public class TwoWheelAutoTesting extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Right Side Park")
+public class autoRightSide extends LinearOpMode {
     // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor arm;
     private Servo claw;
-    private static final double CLAW_OPEN = 0.0;
-    private static final double CLAW_CLOSE = 0.35;
+    private static final double CLAW_OPEN = 0;
+    private static final double CLAW_CLOSE = 0.575;
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
     private static final int TICKS_PER_TILE = 1060;
@@ -31,24 +31,17 @@ public class TwoWheelAutoTesting extends LinearOpMode {
         // Wait for the driver to press start
         waitForStart();
 
-        moveArm(1385 );
-        moveForward(1400);
-        moveArm(-200);
-        moveForward(100);
-        moveArm(1000);
-        clawOpen();
-        rotateLeft(1500);
-        moveForward(1000);
-        moveArm(-1500);
         clawClose();
-        moveArm(700);
-        rotateLeft(1500);
-        moveForward(900);
-        rotateRight(300);
-        moveArm(-300);
+        moveForward(800);
+        moveArm(1400);
+        sleep(500);
+        moveForward(500);
+        sleep(1000);
         clawOpen();
-        moveArm(1200);
-        rotateRight(2700);
+        moveBackward(400);
+        clawClose();
+        rotateRight(2000);
+        moveForward(1400);
     }
 
     // Method to move forward a certain distance (in ticks)
