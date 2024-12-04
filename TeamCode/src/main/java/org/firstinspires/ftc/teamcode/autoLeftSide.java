@@ -32,7 +32,7 @@ public class autoLeftSide extends LinearOpMode {
         waitForStart();
 
         clawClose();
-        moveForward(800);
+        moveForward(700);
         moveArm(1400);
         moveForward(500);
         sleep(1000);

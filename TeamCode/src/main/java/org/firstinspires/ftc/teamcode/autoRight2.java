@@ -4,15 +4,15 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Right Side Park")
-public class autoRightSide extends LinearOpMode {
+@com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "Right Side Park2")
+public class autoRight2 extends LinearOpMode {
     // need to make parameter for choosing left side or right side when we start
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor arm;
     private Servo claw;
     private static final double CLAW_OPEN = 0;
-    private static final double CLAW_CLOSE = 0.575;
+    private static final double CLAW_CLOSE = 0.8;
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
     private static final int TICKS_PER_TILE = 1060;
@@ -32,9 +32,11 @@ public class autoRightSide extends LinearOpMode {
         waitForStart();
 
         clawClose();
+        /*moveForward(50);
+        rotateRight(1000);*/
+        moveForward(-80);
 
-
-        moveForward(700);
+        moveForward(650);
         moveArm(1400);
         sleep(500);
         moveForward(500);
@@ -42,7 +44,7 @@ public class autoRightSide extends LinearOpMode {
         clawOpen();
         moveBackward(400);
         clawClose();
-        rotateRight(2200);
+        rotateRight(2400);
         moveArm(-1400);
         moveForward(1400);
     }

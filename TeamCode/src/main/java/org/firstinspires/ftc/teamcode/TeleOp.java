@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp(name = "TeleOp 11/24/24", group = "TeleOp")
+@TeleOp(name = "osteleop11/24 ", group = "TeleOp")
 public class teleOp extends OpMode {
 
     private DcMotor frontLeftWheel;
@@ -16,17 +16,17 @@ public class teleOp extends OpMode {
     private static final double ARM_SPEED_SCALING_NORMAL = 0.4; // Default arm speed
     private static final double ARM_SPEED_SCALING_FAST = 1.0;  // Fast arm speed for slamming
     private static final double TRIGGER_SPEED_SCALING = 0.2;   // Precise driving adjustment
-    private static final double SAMPLE_WEIGHT_SUPPORT = 0.185; // Additional power when holding a sample
+    private static final double SAMPLE_WEIGHT_SUPPORT = 0.2; // Additional power when holding a sample
     private double lockedClawPosition = 0.0; // Start claw fully opened
 
     private boolean isFastMode = false; // Toggle for arm fast mode
     private boolean previousBumperState = false; // Tracks the last state of the bumper
 
     // Proportional scaling factor constants
-    private static final int ARM_POSITION_MIN = -760; // Lowest position of the arm
+    private static final int ARM_POSITION_MIN = -730; // Lowest position of the arm
     private static final int ARM_POSITION_MAX = -50;  // Highest position of the arm
-    private static final double ARM_MIN_SUPPORT_POWER = 0.04; // Minimum power at top
-    private static final double ARM_MAX_SUPPORT_POWER = 0.9; // Maximum power at bottom
+    private static final double ARM_MIN_SUPPORT_POWER = 0.1; // Minimum power at top
+    private static final double ARM_MAX_SUPPORT_POWER = 0.12; // Maximum power at bottom
 
     @Override
     public void init() {
@@ -52,12 +52,15 @@ public class teleOp extends OpMode {
         double rightPower = -gamepad1.right_stick_y; // Y-axis for right wheel is correct
 
         // Trigger-based incremental speed control (gamepad1)
-        double leftTriggerSpeed = gamepad1.left_trigger * 2*TRIGGER_SPEED_SCALING;
-        double rightTriggerSpeed = gamepad1.right_trigger *2* TRIGGER_SPEED_SCALING;
+        double leftTriggerSpeed = gamepad1.left_trigger * 2 * TRIGGER_SPEED_SCALING;
+        double rightTriggerSpeed = gamepad1.right_trigger * 2 * TRIGGER_SPEED_SCALING;
 
         // Combine joystick and trigger inputs for precise driving
-        frontLeftWheel.setPower(leftPower + leftTriggerSpeed);
-        frontRightWheel.setPower(rightPower + rightTriggerSpeed);
+        double finalLeftPower = Math.max(-1.0, Math.min(1.0, leftPower + leftTriggerSpeed));
+        double finalRightPower = Math.max(-1.0, Math.min(1.0, rightPower + rightTriggerSpeed));
+
+        frontLeftWheel.setPower(finalLeftPower);
+        frontRightWheel.setPower(finalRightPower);
 
         // Arm control with Gamepad 2
         double armSpeedScaling = isFastMode ? ARM_SPEED_SCALING_FAST : ARM_SPEED_SCALING_NORMAL; // Toggle fast mode
@@ -72,7 +75,7 @@ public class teleOp extends OpMode {
             // Gravity support logic with proportional adjustment
             if (armPosition > ARM_POSITION_MIN && armPosition < ARM_POSITION_MAX) {
                 double supportPower = getProportionalArmPower(armPosition);
-                if (lockedClawPosition == 0.58) { // Claw is closed (partially holding a sample)
+                if (lockedClawPosition == 0.8) { // Claw is closed (partially holding a sample)
                     supportPower += SAMPLE_WEIGHT_SUPPORT;
                 }
                 armUp(supportPower);
@@ -91,13 +94,13 @@ public class teleOp extends OpMode {
         if (gamepad2.left_trigger > 0.2) {
             lockedClawPosition = 0.0; // Fully open claw
         } else if (gamepad2.right_trigger > 0.2) {
-            lockedClawPosition = 0.58; // Close claw partially
+            lockedClawPosition = 0.8; // Close claw partially
         }
         clawServo.setPosition(lockedClawPosition);
 
         // Telemetry for debugging and feedback
-        telemetry.addData("Left Wheel Power", leftPower);
-        telemetry.addData("Right Wheel Power", rightPower);
+        telemetry.addData("Left Wheel Power", finalLeftPower);
+        telemetry.addData("Right Wheel Power", finalRightPower);
         telemetry.addData("Arm Position", armPosition);
         telemetry.addData("Claw Position", lockedClawPosition);
         telemetry.addData("Arm Fast Mode", isFastMode ? "Enabled" : "Disabled");
