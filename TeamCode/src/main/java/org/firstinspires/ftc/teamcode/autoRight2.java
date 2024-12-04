@@ -24,6 +24,7 @@ public class autoRight2 extends LinearOpMode {
         arm = hardwareMap.get(DcMotor.class, "arm");
         claw = hardwareMap.get(Servo.class, "claw");
 
+        //test
         frontRight.setDirection(DcMotor.Direction.REVERSE);
 
         // Reverse the right motors so that forward is forward for all motors
