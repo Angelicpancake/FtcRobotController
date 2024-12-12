@@ -10,15 +10,18 @@ public class autoRight2 extends LinearOpMode {
     private DcMotor frontLeft;
     private DcMotor frontRight;
     private DcMotor arm;
+    private DcMotor LinearSlide;
     private Servo claw;
     private static final double CLAW_OPEN = 0;
     private static final double CLAW_CLOSE = 0.8;
+
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
     private static final int TICKS_PER_TILE = 1060;
     @Override
     public void runOpMode() {
         // Initialize motors
+        LinearSlide = hardwareMap.get(DcMotor.class,"LinearSlide");
         frontLeft = hardwareMap.get(DcMotor.class, "frontLeft");
         frontRight = hardwareMap.get(DcMotor.class, "frontRight");
         arm = hardwareMap.get(DcMotor.class, "arm");
@@ -80,6 +83,7 @@ public class autoRight2 extends LinearOpMode {
         telemetry.addData("Claw", "Closed");
         telemetry.update();
     }
+
 
     // Method to move forward
     public void moveForward(int distance) {
