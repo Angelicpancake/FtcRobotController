@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @com.qualcomm.robotcore.eventloop.opmode.Autonomous(name = "JinkaBackupAuto")
@@ -16,11 +17,11 @@ public class JinkaBackupAuto extends LinearOpMode {
     private DcMotor slide;
     private Servo slideClaw;
     private static final double CLAW_OPEN = 0;
-    private static final double CLAW_CLOSE = 0.8;
+    private static final double CLAW_CLOSE = 1;
     //Add linear slide
 
     // Constant for encoder ticks per tile (assuming 1060 ticks per tile)
-    private static final int TICKS_PER_TILE = 1060;
+    private static final int TICKS_PER_TILE = 1100;
 
 
     @Override
@@ -41,7 +42,9 @@ public class JinkaBackupAuto extends LinearOpMode {
 
 
         frontRight.setDirection(DcMotor.Direction.REVERSE);
-        backLeft.setDirection(DcMotor.Direction.REVERSE);
+        backRight.setDirection(DcMotor.Direction.REVERSE);
+        arm.setDirection(DcMotor.Direction.REVERSE);
+        slide.setDirection(DcMotor.Direction.REVERSE);
 
 
         // Wait for the driver to press start
@@ -50,28 +53,27 @@ public class JinkaBackupAuto extends LinearOpMode {
 
         //add auto methods here
 
+        moveForward(TICKS_PER_TILE);
+        sleep(1000);
+        moveBackward(TICKS_PER_TILE);
+        sleep(1000);
+        moveLeft(TICKS_PER_TILE);
+        //counterclockwise
+        sleep(1000);
+        moveRight(TICKS_PER_TILE);
+        //clockwise
+        sleep(1000);
+        clockwise(TICKS_PER_TILE);
+        //right
+        sleep(1000);
+        counterClockwise(TICKS_PER_TILE);
+        //left
+        sleep(1000);
+
         //testing methods
 
-        moveForward(1000);
-        moveBackward(1000);
-        moveLeft(1000);
-        moveRight(1000);
-        clockwise(1000);
-        counterClockwise(1000);
 
 
-        moveArm(500);
-        moveArm(-500);
-
-        moveSlide(100);
-        moveSlide(-100);
-
-
-        armClawOpen();
-        armClawClose();
-
-        slideClawOpen();
-        slideClawClose();
     }
 
 
@@ -170,21 +172,21 @@ public class JinkaBackupAuto extends LinearOpMode {
 
     //checked
     // Method to move right
-    public void moveLeft(int distance) {
+    public void counterClockwise(int distance) {
         moveMotors(distance, -distance, distance, -distance);
     }
 
     //checked
     // Method to move left
-    public void moveRight(int distance) {
+    public void clockwise(int distance) {
         moveMotors(-distance, distance, -distance, distance);
     }
 
-    public void clockwise(int distance){
+    public void moveRight(int distance){
         moveMotors(distance, -distance, -distance, distance);
     }
 
-    public void counterClockwise(int distance){
+    public void moveLeft(int distance){
         moveMotors(-distance, distance, distance, -distance);
     }
 
